@@ -40,7 +40,8 @@ export const ComplexGroup = ({
 	cloneEnabled,
 	handleToggleClick,
 	handleCloneClick,
-	handleRemoveClick
+	handleRemoveClick,
+	handleRemoveClickDummy
 }) => {
 	const classes = [
 		'carbon-row',
@@ -79,10 +80,11 @@ export const ComplexGroup = ({
 
 			<a
 				href="#"
-				className="carbon-btn-remove dashicons-before dashicons-trash"
+				className="carbon-btn-remove carbon-btn-remove-with-confirmation dashicons-before dashicons-trash"
 				title={carbonFieldsL10n.field.complexRemoveButton}
-				onClick={handleRemoveClick}>
+				onClick={handleRemoveClickDummy}>
 				{carbonFieldsL10n.field.complexRemoveButton}
+				<span onClick={handleRemoveClick}>{carbonFieldsL10n.field.complexRemoveButton}</span>
 			</a>
 
 			<a
@@ -149,6 +151,7 @@ export const enhance = compose(
 		handleToggleClick: ({ group, onExpand, onCollapse }) => preventDefault(() => group.collapsed ? onExpand(group.id) : onCollapse(group.id)),
 		handleCloneClick: ({ group, onClone }) => preventDefault(() => onClone(group.id)),
 		handleRemoveClick: ({ group, onRemove }) => preventDefault(() => onRemove(group.id)),
+		handleRemoveClickDummy: ({ group }) => preventDefault(() => false),
 	})
 );
 
